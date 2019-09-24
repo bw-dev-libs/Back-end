@@ -10,7 +10,7 @@ const validateUserId = require('../middleware/validateUserId');
 const validateTemplate = require('../middleware/validateTemplate');
 
 // get all users
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     User.get()
         .then(users => res.status(200).json(users))
         .catch(err => {
@@ -28,13 +28,13 @@ router.get('/', (req, res) => {
 // });
 
 // get user by id
-router.get('/:id',  validateUserId, (req, res) => {
+router.get('/:id', restricted, validateUserId, (req, res) => {
     // console.log('get user');
     res.status(200).json(req.user);
 });
 
 // delete user by id
-router.delete('/:id',  validateUserId, (req, res) => {
+router.delete('/:id', restricted, validateUserId, (req, res) => {
     const { id } = req.user; // can get id from validateUserId middleware 
     User.remove(id)
         .then(() => {
@@ -47,7 +47,7 @@ router.delete('/:id',  validateUserId, (req, res) => {
 });
 
 // update user by id
-router.put('/:id',  validateUserId, (req, res) => {
+router.put('/:id', restricted, validateUserId, (req, res) => {
     const { id } = req.params;
     const { username } = req.body;
     User.update(id, { username })
@@ -68,7 +68,7 @@ router.put('/:id',  validateUserId, (req, res) => {
 });
 
 // get templates for user specified by id
-router.get('/:id/templates',  validateUserId, (req, res) => {
+router.get('/:id/templates', restricted, validateUserId, (req, res) => {
     const { id } = req.params;
     User.getUserTemplates(id)
         .then(templates => {
@@ -81,7 +81,7 @@ router.get('/:id/templates',  validateUserId, (req, res) => {
 });
 
 // create new template for user specified by id
-router.post('/:id/templates',  validateUserId, validateTemplate, (req, res) => {
+router.post('/:id/templates', restricted, validateUserId, validateTemplate, (req, res) => {
     const template = req.body;
     Template.insert(template)
         .then(template => {
