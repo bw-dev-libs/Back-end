@@ -52,13 +52,13 @@ router.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(err => {
             if (err) {
-                res.status(500).json({ error: "You can checkout any time you like, but you can never leave." });
+                res.status(500).json({ error: "Error logging out." });
             } else {
-                res.status(200).json({ message: "Bye, thanks for playing!" });
+                res.status(200).json({ message: "You have been logged out." });
             }
         })
     } else {
-        res.status(200).json({ message: "You were never here to begin with..." });
+        res.status(200).json({ message: "You have been logged out." });
     }
 });
 
