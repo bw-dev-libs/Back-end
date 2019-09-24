@@ -6,6 +6,10 @@ exports.up = function (knex) {
             .notNullable()
             .unique();
         tbl.string('password', 128).notNullable();
+        tbl
+            .integer('templates_id')
+            .unique()
+            .notNullable();
     });
 };
 
