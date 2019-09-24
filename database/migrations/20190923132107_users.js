@@ -10,12 +10,12 @@ exports.up = function (knex) {
         })
         .createTable('templates', function (templates) {
             templates.increments();
-            templates.string('noun', 128).notNullable()
+            templates.string('programming_language', 128).notNullable()
+            templates.string('noun', 128).notNullable();
             templates.string('verb', 128).notNullable();
-            templates.string('adjective', 128).notNullable();
-            templates.string('noun2', 128).notNullable()
-            templates.string('verb2', 128).notNullable();
-            templates.string('adjective2', 128).notNullable();
+            templates.string('ing_verb', 128).notNullable()
+            templates.string('ed_verb', 128).notNullable();
+            templates.string('noun2', 128).notNullable();
             templates
                 .integer('user_id')
                 .unsigned()
