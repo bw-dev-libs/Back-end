@@ -7,7 +7,7 @@ function validateTemplate(req, res, next) {
     if (!programming_language && noun && verb && ing_verb && ed_verb && noun2) {
         return res.status(400).json({ error: "Please fill in all parts of speech." });
     }
-    req.body = { programming_language, noun, verb, ing_verb, ed_verb, noun2  };
+    req.body = { user_id, programming_language, noun, verb, ing_verb, ed_verb, noun2  };
     next();
 };
 
