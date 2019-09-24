@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     if (token) { //bring in secret from secrets file below
         jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
             if (err) { //token expired or is invalid
-                res.status(401).json({ error: 'You shall not pass!' });
+                res.status(401).json({ error: 'You must be logged in to see this page.' });
             } else { //token is good
                 req.user = { username: decodedToken.username };     //can add the username to req object. optional
                 next();
