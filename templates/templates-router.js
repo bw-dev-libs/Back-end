@@ -8,7 +8,7 @@ const validateTemplateId = require('../middleware/validateTemplateId');
 const validateTemplate = require('../middleware/validateTemplate');
 
 // get all templates
-router.get('/',  (req, res) => {
+router.get('/', restricted, (req, res) => {
     Template.get()
         .then(template => {
             res.status(200).json(template);
@@ -19,7 +19,7 @@ router.get('/',  (req, res) => {
         });
 });
 
-router.get('/:id',  validateTemplateId, (req, res) => {
+router.get('/:id', restricted, validateTemplateId, (req, res) => {
     const { id } = req.template;
     Template.getById(id)
         .then(() => {
@@ -31,7 +31,7 @@ router.get('/:id',  validateTemplateId, (req, res) => {
         });
 });
 
-router.delete('/:id',  validateTemplateId, (req, res) => {
+router.delete('/:id', restricted, validateTemplateId, (req, res) => {
     const { id } = req.params;
     Template.remove(id)
         .then(() => {

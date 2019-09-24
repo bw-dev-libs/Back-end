@@ -1,17 +1,17 @@
+Dev-Libs
+
 # Back-end
 // What project does + screenshot of product in action
 "Mad-Libs" for developers.  This app will allow users to complete "Dev-Libs" that can be posted to Twitter.  Imagine a "MadLib"-style script about a famous, well-regarded developer speaking at a conference - except this time, with your help, it goes terribly wrong: crazy startup ideas (selling flame-throwers online, perhaps?), misadventures in the life of a developer ("I almost died of smoke inhalation making that final git-commit/git-push"), troubles with merge conflicts (alias mywayorthehighway="git add -A && git commit -m 'fixed everything' && git push origin --all --force"), failing tests ("Chuck Norris can’t test for equality because he has no equal."), etc.
 
-
-// How to install it
+# Installation
 -having a code block in your README that shows exactly what folks need to type into their shell to install your software; and
 -doing this for all platforms that your software supports, if there’s a difference between them (e.g. OS X/Linux/Windows).
 
-
-// Example usage
+# Usage Example
 -few useful and motivating examples. Again you’d lay out exactly what people need to type into their shell or click in the UI to get the examples working.
 
-Endpoints
+ENDPOINTS:
 Register endpoint: 
 /api/auth/register
 {
@@ -26,8 +26,14 @@ Login endpoint:
     "password": "password"
 }
 
-Dashboard endpoint:
-/api/auth/dashboard
+User endpoints:
+/api/users
+/api/users/:id
+/api/users/:id/templates
+
+Template endpoints:
+/api/templates
+/api/templates/:id
 
 
 // How to set up Dev environment
