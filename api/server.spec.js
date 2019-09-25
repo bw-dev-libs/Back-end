@@ -19,7 +19,7 @@ describe('server.js', () => {
             request(server)
                 .get('/')
                 .then(res => {
-                    expect(res.type).toMatch(/json/i);
+                    expect(res.type).toBe('text/html');
                     done();
                 });
         });
