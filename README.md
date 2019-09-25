@@ -10,6 +10,8 @@ RESTful API for Dev-Libs App
 -doing this for all platforms that your software supports, if there’s a difference between them (e.g. OS X/Linux/Windows).
 
 # Usage Examples
+https://documenter.getpostman.com/view/8668166/SVn2Pbrx?version=latest
+
 POST 
     Register a new user
         Endpoint:
