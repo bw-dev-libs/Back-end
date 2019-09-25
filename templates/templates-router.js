@@ -8,7 +8,7 @@ const validateTemplateId = require('../middleware/validateTemplateId');
 const validateTemplate = require('../middleware/validateTemplate');
 
 // get all templates
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     Template.get()
         .then(template => {
             res.status(200).json(template);
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:id', validateTemplateId, (req, res) => {
+router.get('/:id', restricted, validateTemplateId, (req, res) => {
     const { id } = req.template;
     Template.getById(id)
         .then(() => {
@@ -31,7 +31,7 @@ router.get('/:id', validateTemplateId, (req, res) => {
         });
 });
 
-router.delete('/:id', validateTemplateId, (req, res) => {
+router.delete('/:id', restricted, validateTemplateId, (req, res) => {
     const { id } = req.params;
     Template.remove(id)
         .then(() => {
@@ -43,20 +43,20 @@ router.delete('/:id', validateTemplateId, (req, res) => {
         });
 });
 
-// router.put('/:id', validateTemplate, validateTemplateId, (req, res) => {
-//     const { id } = req.params;
-//     const { user_id, noun, verb, adjective, noun2, verb2, adjective2 } = req.body;
-//     Template.update(id, { user_id, noun, verb, adjective, noun2, verb2, adjective2 })
-//         .then(updated => {
-//             if (updated) {
-//                 res.status(200).json(req.body);
-//             }
+router.put('/:id', validateTemplate, validateTemplateId, (req, res) => {
+    const { id } = req.params;
+    const { user_id, programming_language, noun, verb, ing_verb, ed_verb, noun2 } = req.body;
+    Template.update(id, { user_id, programming_language, noun, verb, ing_verb, ed_verb, noun2 })
+        .then(updated => {
+            if (updated) {
+                res.status(200).json(req.body);
+            }
 
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json({ error: "Error updating template." });
-//         });
-// });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: "Error updating template." });
+        });
+});
 
 module.exports = router;
