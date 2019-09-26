@@ -45,6 +45,6 @@ function remove(id) {
 function getUserTemplates(userId) {
     return db('templates as t')
         .join('users as u', 'u.id', 't.user_id')
-        .select('t.programming_language', 't.noun', 't.verb', 't.ing_verb', 't.ed_verb', 't.noun2')
+        .select('t.id', 't.programming_language', 't.noun', 't.verb', 't.ing_verb', 't.ed_verb', 't.noun2')
         .where('t.user_id', userId);
 }
