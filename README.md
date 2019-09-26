@@ -1,58 +1,260 @@
 Dev-Libs
 
 # Back-end
-// What project does + screenshot of product in action
-"Mad-Libs" for developers.  This app will allow users to complete "Dev-Libs" that can be posted to Twitter.  Imagine a "MadLib"-style script about a famous, well-regarded developer speaking at a conference - except this time, with your help, it goes terribly wrong: crazy startup ideas (selling flame-throwers online, perhaps?), misadventures in the life of a developer ("I almost died of smoke inhalation making that final git-commit/git-push"), troubles with merge conflicts (alias mywayorthehighway="git add -A && git commit -m 'fixed everything' && git push origin --all --force"), failing tests ("Chuck Norris can’t test for equality because he has no equal."), etc.
+
+# Introduction
+RESTful API for Dev-Libs App
 
 # Installation
 -having a code block in your README that shows exactly what folks need to type into their shell to install your software; and
 -doing this for all platforms that your software supports, if there’s a difference between them (e.g. OS X/Linux/Windows).
 
-# Usage Example
--few useful and motivating examples. Again you’d lay out exactly what people need to type into their shell or click in the UI to get the examples working.
+# Usage Examples
+https://documenter.getpostman.com/view/8668166/SVn2Pbrx?version=latest
 
-ENDPOINTS:
-Register endpoint: 
-/api/auth/register
-{
-    "username": "userOne",
-    "password": "password"
-}
+POST 
+    Register a new user
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/auth/register
 
-Login endpoint:
-/api/auth/login
-{
-    "username": "userOne",
-    "password": "password"
-}
+        Body:
+            {
+                "username": "userOne",
+                "password": "password1"
+            }
 
-User endpoints:
-/api/users
-/api/users/:id
-/api/users/:id/templates
+        Headers:
+            Content-Type: application/json
 
-Template endpoints:
-/api/templates
-/api/templates/:id
+        Example Request:
+            Default
+                curl --location --request POST "https://dev-libs.herokuapp.com/api/auth/register" \
+                    --data "{
+                        \"username\": \"user\",
+                        \"password\": \"password\"
+                    }"
+POST
+    Login
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/auth/login
+
+        Body:
+            {
+                "username": "userOne",
+                "password": "password1"
+            }
+        
+        Headers:
+            Content-Type: application/json
+
+        Example Request: 
+            Default
+                curl --location --request POST "https://dev-libs.herokuapp.com/api/auth/login" \
+                    --data "{
+                        \"username\": \"user\",
+                        \"password\": \"password\"
+                    }"
+
+GET 
+    Get user by specified id
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/users/:id
+        
+        Path Variables:
+            id
+        
+        Example Request:
+            Default
+                curl --location --request GET "https://dev-libs.herokuapp.com/api/users/:id" \
+                    --data ""
+
+PUT 
+    Update user by specified id
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/users/:id
+        
+        Headers:
+            Content-Type: application/json
+
+        Path Variables:
+            id
+
+        Body:
+            {
+                "username": "updatedName",
+                "password": "updatedPassword1"
+            }
+
+        Example Request: 
+            Default
+                curl --location --request PUT "https://dev-libs.herokuapp.com/api/users/:id" \
+                    --data "{
+                        \"username\": \"updatedName\",
+                        \"password\": \"updated\"
+                    }"
+
+DEL
+    Delete user with specified id
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/users/:id
+        
+        Path Variables:
+            id
+
+        Example Request: 
+            Default
+                curl --location --request DELETE "https://dev-libs.herokuapp.com/api/users/:id" \
+                    --data ""
 
 
-// How to set up Dev environment
--installing all development dependencies; and
--running an automated test suite of some kind.
-- Having at least a basic test suite is important because it lets developers confirm that they’ve got their development environment set up correctly. Nothing more frustrating than wanting to play around with a cool project and being unable to build it!
+GET 
+    Get all templates
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/templates
+
+        Example Request: 
+            Default
+                curl --location --request GET "https://dev-libs.herokuapp.com/api/templates" \
+                    --data ""
 
 
-// How to ship a change
--This should include a quick description of the general development process for the project. For example, do you accept pull-requests or want patches via email and so on.
--Also, it helps to give instructions on how to build and release a new version of the software. Even if this is not something that all contributors will have to do at some point, it helps immensely to provide these instructions for the person doing the releases (i.e. often yourself).
+        Example Response:
+            200
+                [
+                    {
+                        "id": 1,
+                        "programming_language": "bears",
+                        "noun": "chirps",
+                        "verb": "large",
+                        "ing_verb": "bird",
+                        "ed_verb": "moos",
+                        "noun2": "small",
+                        "user_id": 1
+                    },
+                    {
+                        "id": 2,
+                        "programming_language": "beets",
+                        "noun": "chirps",
+                        "verb": "tiny",
+                        "ing_verb": "cow",
+                        "ed_verb": "moos",
+                        "noun2": "large",
+                        "user_id": 1
+                    },
+                    {
+                        "id": 3,
+                        "programming_language": "battlestar_galactica",
+                        "noun": "space",
+                        "verb": "travel",
+                        "ing_verb": "debugging",
+                        "ed_verb": "flew",
+                        "noun2": "solar_system",
+                        "user_id": 1
+                    }
+                ]
+
+GET 
+    Get template by specified id    
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/templates/:id
+
+        Path Variables:
+            id
+
+        Example Request: 
+            Default
+                curl --location --request GET "https://dev-libs.herokuapp.com/api/templates/:id" \
+                    --data "
+
+POST 
+    Create new template for specified user
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/users/:id/templates
+
+        Headers:
+            Content-Type: application/json
+
+        Path Variables:
+            id
+        
+        Body:
+            {
+                "programming_language": "battlestar_galactica",
+                "noun": "space",
+                "verb": "travel",
+                "ing_verb": "debugging",
+                "ed_verb": "flew",
+                "noun2": "solar_system"
+            }
+
+        Example Request: 
+            Default
+                curl --location --request POST "https://dev-libs.herokuapp.com/api/users/:id/templates" \
+                    --data ""
+
+PUT 
+    Update template with specified id
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/templates/:id
+
+        Headers:
+            Content-Type: application/json
+
+        Path Variables:
+            id
+        
+        Body:
+            {
+                "programming_language": "beets",
+                "noun": "chirps",
+                "verb": "large",
+                "ing_verb": "bird",
+                "ed_verb": "moos",
+                "noun2": "small"
+            }
+
+        Example Request: 
+            Default
+                curl --location --request PUT "https://dev-libs.herokuapp.com/api/templates/:id" \
+                    --data "{
+                        \"programming_language\": \"battlestar_galactica\",
+                        \"noun\": \"space\",
+                        \"verb\": \"travel\",
+                        \"ing_verb\": \"debugging\",
+                        \"ed_verb\": \"flew\",
+                        \"noun2\": \"solar_system\"
+                    }"
+
+        Example Response:
+            200
+                {
+                    "id": 5,
+                    "programming_language": "battlestar_galactica",
+                    "noun": "space",
+                    "verb": "travel",
+                    "ing_verb": "debugging",
+                    "ed_verb": "flew",
+                    "noun2": "solar_system",
+                    "user_id": 1
+                    }
+
+DEL 
+    Delete template with specified id
+        Endpoint:
+            https://dev-libs.herokuapp.com/api/templates/:id
+
+        Path Variables:
+            id
+        
+        Example Request: 
+            Default
+                curl --location --request DELETE "https://dev-libs.herokuapp.com/api/templates/:id" \
+                    --data ""
 
 
-// Change log
--Users of your project want to know what changes were made compared to the last version. I know that GitHub has the “Releases” tool for this but I still like having a condensed change log in the README. I usually just make a bullet list with a bullet for each release and the key changes made in that release.
+# License 
+“XYZ is available under the $SoAndSo license. See LICENSE.txt for more information”. If you’re extra nice you can put a link to the license file.
 
 
-// License and Author info
--contact information for the author (I like Twitter and email); and
--a quick statement about the license the software is under. I usually do this by saying “XYZ is available under the $SoAndSo license. See LICENSE.txt for more information”. If you’re extra nice you can put a link to the license file.
-
-
+# Author
+Tania Keller
